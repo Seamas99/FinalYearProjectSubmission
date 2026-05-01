@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FinalYearProject.ViewModels"
+             xmlns:model="clr-namespace:FinalYearProject.Model"
+             xmlns:screens="clr-namespace:FinalYearProject.Screens"
+             x:DataType="viewmodel:VehicleViewModel"
+             x:Class="FinalYearProject.Screens.ContentViews.CalculationEntry.VehicleEntryContentView">
+    <Grid>
+        <ScrollView IsVisible="{Binding IsContentVisible}">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="{Binding DistanceUnit, StringFormat='Distance Travelled ({0})'}" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                        <Entry Keyboard="Numeric" 
+                           Text="{Binding DistanceTravelled}" 
+                           Placeholder="150" 
+                           ClearButtonVisibility="WhileEditing"
+                           BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="6" IsVisible="{Binding IsSavedVehiclesPopulated}">
+                    <Label Text="Saved Vehicle" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                        <Picker ItemsSource="{Binding SavedVehicles}" 
+                            ItemDisplayBinding="{Binding name}" 
+                            SelectedItem="{Binding SelectedVehicle}" 
+                            Title="Select a vehicle..."
+                            BackgroundColor="Transparent">
+                        </Picker>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Border IsVisible="{Binding IsManualEntry}"
+                    Stroke="#E5E7EB" 
+                    StrokeThickness="1" 
+                    StrokeShape="RoundRectangle 12" 
+                    BackgroundColor="#F9FAFB" 
+                    Padding="15">
+                    <VerticalStackLayout Spacing="15">
+                        <Label Text="Manual Entry" FontSize="16" FontAttributes="Bold" TextColor="#374151" Margin="0,0,0,5"/>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Vehicle Make" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                            <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" BackgroundColor="White" Padding="10,0">
+                                <Picker ItemsSource="{Binding FullVehicleMakes}" 
+                                    ItemDisplayBinding="{Binding name}" 
+                                    SelectedItem="{Binding SelectedMake}"
+                                    Title="Select make..."
+                                    BackgroundColor="Transparent"/>
+                            </Border>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Spacing="6">
+                            <Label Text="Vehicle Model" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                            <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" BackgroundColor="White" Padding="10,0">
+                                <Picker ItemsSource="{Binding SelectedMakeListOfVehicleModels}" 
+                                    ItemDisplayBinding="{Binding name}" 
+                                    SelectedItem="{Binding SelectedModel}"
+                                    Title="Select model..."
+                                    BackgroundColor="Transparent"/>
+                            </Border>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="12" Margin="0,15,0,20">
+                    <Button Text="Calculate Carbon Footprint" 
+                        Command="{Binding CalculateFootprintCommand}"/>
+
+                    <Button Text="Test Vehicle" 
+                        Command="{Binding TestFootprintCommand}" 
+                        BackgroundColor="Transparent" 
+                        TextColor="#2EAA1B" 
+                        BorderColor="#2EAA1B"
+                        BorderWidth="1.5"/>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="{AppThemeBinding Light=White, Dark=#111827}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                   Color="#58C572" 
+                   WidthRequest="50" 
+                   HeightRequest="50" />
+                <Label Text="Loading..." 
+                       TextColor="#6B7280" 
+                       FontSize="16" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentView>

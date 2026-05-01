@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinalYearProject.Screens.ContentViews.CalculationResults.VehicleCalculationResults">
+    <Grid>
+        <VerticalStackLayout Spacing="15" Padding="20" IsVisible="{Binding IsContentVisible}">
+
+            <Border Stroke="#86EFAC" StrokeThickness="2" StrokeShape="RoundRectangle 12" BackgroundColor="#F0FDF4" Padding="20">
+                <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
+                    <Label Text="Carbon Generated" FontSize="14" TextColor="#166534" HorizontalOptions="Center" FontAttributes="Bold"/>
+                    <Label Text="{Binding CarbonGenerated, StringFormat='{}{0:N2} g'}" FontSize="28" TextColor="#15803D" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Stroke="#E5E7EB" StrokeThickness="1" StrokeShape="RoundRectangle 12" BackgroundColor="White" Padding="15">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Calculation Details" FontSize="16" FontAttributes="Bold" TextColor="#374151" Margin="0,0,0,5"/>
+
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Estimate Type" TextColor="#6B7280" FontSize="14" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Journey" FontAttributes="Bold" FontSize="14" TextColor="#374151" VerticalOptions="Center"/>
+                    </Grid>
+
+                    <BoxView HeightRequest="1" Color="#F3F4F6" />
+
+                    <Grid ColumnDefinitions="*, Auto">
+                        <Label Text="Distance Travelled" TextColor="#6B7280" FontSize="14" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="{Binding DistanceTravelled, StringFormat='{}{0} mi'}" FontAttributes="Bold" FontSize="14" TextColor="#374151" VerticalOptions="Center"/>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="{AppThemeBinding Light=White, Dark=#111827}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                   Color="#58C572" 
+                   WidthRequest="50" 
+                   HeightRequest="50" />
+                <Label Text="Loading..." 
+       TextColor="#6B7280" 
+       FontSize="16" 
+       FontAttributes="Bold" 
+       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentView>

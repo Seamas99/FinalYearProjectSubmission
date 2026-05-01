@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- ####################################################################
+
+This file was generates automatically via the 
+IconPacks.Browser (MIT-License). 
+
+Visit https://github.com/MahApps/MahApps.Metro.IconPacks and 
+https://github.com/MahApps/MahApps.Metro.IconPacks/blob/develop/LICENSE 
+for more information.
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Icon-Name: 			Account
+Iconpack:			Material
+Iconpack-Homepage: 	https://pictogrammers.com/library/mdi/
+Iconpack-License:	https://github.com/Templarian/MaterialDesign?tab=License-1-ov-file#readme
+
+#####################################################################-->
+
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="48"
+     height="48">
+    <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"
+          style="fill:#FFFFFF;
+                 stroke:none
+                 stroke-width:0;
+                 stroke-linecap:flat;
+                 stroke-linejoin:miter;"
+          transform="matrix(3,0,0,3,-12,-12)" />
+</svg>

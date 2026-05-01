@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- ####################################################################
+
+This file was generates automatically via the 
+IconPacks.Browser (MIT-License). 
+
+Visit https://github.com/MahApps/MahApps.Metro.IconPacks and 
+https://github.com/MahApps/MahApps.Metro.IconPacks/blob/develop/LICENSE 
+for more information.
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Icon-Name: 			Terrain
+Iconpack:			Material
+Iconpack-Homepage: 	https://pictogrammers.com/library/mdi/
+Iconpack-License:	https://github.com/Templarian/MaterialDesign?tab=License-1-ov-file#readme
+
+#####################################################################-->
+
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="48"
+     height="48">
+    <path d="M14,6L10.25,11L13.1,14.8L11.5,16C9.81,13.75 7,10 7,10L1,18H23L14,6Z"
+          style="fill:#000000;
+                 stroke:none
+                 stroke-width:0;
+                 stroke-linecap:flat;
+                 stroke-linejoin:miter;"
+          transform="matrix(2.1818181818181817,0,0,2.1818181818181817,-2.1818181818181817,-2.1818181818181817)" />
+</svg>

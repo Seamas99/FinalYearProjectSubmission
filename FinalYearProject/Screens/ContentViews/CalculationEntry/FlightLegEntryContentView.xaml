@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinalYearProject.Screens.ContentViews.CalculationEntry.FlightLegEntryContentView">
+    <Grid>
+        <VerticalStackLayout Spacing="15" IsVisible="{Binding IsContentVisible}">
+
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Departure Airport" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                    <Picker ItemsSource="{Binding AirportsList}" 
+                        ItemDisplayBinding="{Binding Path=name}" 
+                        SelectedItem="{Binding DepartureAirport, Mode=TwoWay}"
+                        Title="Select departure..."
+                        BackgroundColor="Transparent"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Arrival Airport" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                    <Picker ItemsSource="{Binding AirportsList}" 
+                        ItemDisplayBinding="{Binding Path=name}" 
+                        SelectedItem="{Binding ArrivalAirport, Mode=TwoWay}"
+                        Title="Select arrival..."
+                        BackgroundColor="Transparent"/>
+                </Border>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Cabin Class" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                    <Picker ItemsSource="{Binding CabinClasses}" 
+                        SelectedItem="{Binding CabinClass, Mode=TwoWay}"
+                        Title="Select class..."
+                        BackgroundColor="Transparent"/>
+                </Border>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="{AppThemeBinding Light=White, Dark=#111827}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                   Color="#58C572" 
+                   WidthRequest="50" 
+                   HeightRequest="50" />
+                <Label Text="Loading..." 
+                       TextColor="#6B7280" 
+                       FontSize="16" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentView>

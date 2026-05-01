@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- ####################################################################
+
+This file was generates automatically via the 
+IconPacks.Browser (MIT-License). 
+
+Visit https://github.com/MahApps/MahApps.Metro.IconPacks and 
+https://github.com/MahApps/MahApps.Metro.IconPacks/blob/develop/LICENSE 
+for more information.
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Icon-Name: 			CalculateOutline
+Iconpack:			MaterialDesign
+Iconpack-Homepage: 	https://github.com/google/material-design-icons
+Iconpack-License:	https://github.com/google/material-design-icons?tab=Apache-2.0-1-ov-file#readme
+
+#####################################################################-->
+
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="48"
+     height="48">
+    <path d="M 5 3 C 3.9000011 3 3 3.9000011 3 5 L 3 19 C 3 20.099999 3.9000011 21 5 21 L 19 21 C 20.099999 21 21 20.099999 21 19 L 21 5 C 21 3.9000011 20.099999 3 19 3 L 5 3 z M 5 5 L 19 5 L 19 19 L 5 19 L 5 5 z M 14.089844 6 L 13.029297 7.0605469 L 14.439453 8.4707031 L 13.029297 9.890625 L 14.089844 10.949219 L 15.5 9.5390625 L 16.910156 10.949219 L 17.970703 9.890625 L 16.560547 8.4707031 L 17.970703 7.0605469 L 16.910156 6 L 15.5 7.4101562 L 14.089844 6 z M 6.25 7.7207031 L 6.25 9.2207031 L 11.25 9.2207031 L 11.25 7.7207031 L 6.25 7.7207031 z M 8 12.5 L 8 14.5 L 6 14.5 L 6 16 L 8 16 L 8 18 L 9.5 18 L 9.5 16 L 11.5 16 L 11.5 14.5 L 9.5 14.5 L 9.5 12.5 L 8 12.5 z M 13 13.25 L 13 14.75 L 18 14.75 L 18 13.25 L 13 13.25 z M 13 15.75 L 13 17.25 L 18 17.25 L 18 15.75 L 13 15.75 z "
+          style="fill:#000000;
+                 stroke:none
+                 stroke-width:0;
+                 stroke-linecap:flat;
+                 stroke-linejoin:miter;"
+          transform="matrix(2.6666666666666665,0,0,2.6666666666666665,-8,-8)" />
+</svg>

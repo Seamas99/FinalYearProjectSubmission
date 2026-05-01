@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FinalYearProject.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FinalYearProject"
+    xmlns:screens="clr-namespace:FinalYearProject.Screens"
+    Shell.FlyoutBehavior="Disabled"
+    Title="FinalYearProject">
+
+    <TabBar>
+        <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" Icon="material_home.svg" Route="MainPage" />
+        <ShellContent Title="Progress" ContentTemplate="{DataTemplate screens:Progress}" Icon="material_progress_check.svg" Route="Progress" />
+        <ShellContent Title="Leaderboard" ContentTemplate="{DataTemplate screens:Leaderboard}" Icon="material_trophy_variant.svg" Route="Leaderboard" />
+        <ShellContent Title="Challenges" ContentTemplate="{DataTemplate screens:Challenges}" Icon="material_weight_lifter.svg" Route="Challenges" />
+
+    </TabBar>
+
+    <!--<ShellContent Title="Profile" ContentTemplate="{DataTemplate screens:Profile}" Route="Profile"/>
+    <ShellContent Title="CalculationSelectionScreen" ContentTemplate="{DataTemplate screens:CalculationSelectionScreen}" Route="CalculationSelectionScreen"/>-->
+
+
+</Shell>

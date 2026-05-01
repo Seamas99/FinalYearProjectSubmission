@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinalYearProject.Screens.Profile"
+             x:Name="ProfilePage"
+             xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             Shell.TabBarIsVisible="True"
+             xmlns:viewmodel="clr-namespace:FinalYearProject.ViewModels"
+             x:DataType="viewmodel:ProfileViewModel">
+    <Shell.TitleView>
+        <Grid HorizontalOptions="Fill">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <ImageButton Source="game_icons_compass.svg" 
+                 Grid.Column="1"
+                 Grid.Row="1"
+                 Grid.RowSpan="2"
+                 Margin="0, 0, 5, 0"
+                 WidthRequest="24" 
+                 HeightRequest="24"
+                 VerticalOptions="Center"/>
+
+                <Label Grid.Column="2" Grid.Row="1" Text="Carbon" FontAttributes="Bold" FontSize="20" TextColor="#58C572" Margin="0,0,5,0"/>
+                <Label Grid.Column="3" Grid.Row="1" Text="Compass" FontAttributes="Bold" FontSize="20" TextColor="#FFFFFF" HorizontalOptions="Start"/>
+                <Label Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2" Text="Carbon Tracking" FontAttributes="Bold" FontSize="12" TextColor="#FFFFFF" />
+            </Grid>
+        </Grid>
+    </Shell.TitleView>
+
+    <Grid>
+        <ScrollView IsVisible="{Binding IsContentVisible}">
+            <VerticalStackLayout>
+
+                <Grid RowDefinitions="160, Auto" Margin="0,0,0,10">
+
+                    <Image Grid.Row="0"
+                       Source="earth_bg.png" 
+                       Aspect="AspectFill" />
+
+                    <ImageButton Grid.Row="1"
+                             Source="material_cog.svg"
+                             HorizontalOptions="End"
+                             VerticalOptions="Start"
+                             Command="{Binding GoToSettingsPageCommand}"
+                             Margin="15"
+                             WidthRequest="24"
+                             HeightRequest="24" />
+
+                    <Grid Grid.Row="0" Grid.RowSpan="2" 
+                      Margin="0,100,0,0" 
+                      HorizontalOptions="Center" 
+                      VerticalOptions="End">
+
+                        <Border StrokeShape="RoundRectangle 60" 
+                            Stroke="Transparent" 
+                            WidthRequest="120" 
+                            HeightRequest="120">
+                            <Image Source="{Binding ProfileImageSource}" 
+                               Aspect="AspectFill"/>
+                        </Border>
+
+                        <ImageButton Source="material_tray_arrow_up.svg"
+                                 HorizontalOptions="End"
+                                 VerticalOptions="End"
+                                 Margin="0,0,-15,10"
+                                 WidthRequest="28"
+                                 HeightRequest="28" 
+                                 Command="{Binding UploadProfilePictureCommand}"/>
+                    </Grid>
+                </Grid>
+
+                <VerticalStackLayout Spacing="2" Margin="0,0,0,20">
+                    <Label Text="{Binding DisplayName}" 
+                       FontSize="22" 
+                       FontAttributes="Bold" 
+                       HorizontalOptions="Center" 
+                       TextColor="#333333" />
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Label Text="Join Date:"
+                           FontSize="12" 
+                           TextColor="#666666"/>
+                        <Label Text="{Binding JoinDate}" 
+                           FontSize="12" 
+                           TextColor="#666666" />
+                    </HorizontalStackLayout>
+
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="20,0,20,20">
+
+                    <Border Grid.Column="0" 
+                        BackgroundColor="#E0E0E0" 
+                        StrokeShape="RoundRectangle 10" 
+                        Stroke="Transparent" 
+                        Padding="15">
+                        <VerticalStackLayout Spacing="10">
+                            <HorizontalStackLayout Spacing="5" HorizontalOptions="Start">
+                                <Image Source="material_leaf.svg" WidthRequest="18" HeightRequest="18" VerticalOptions="Center"/>
+                                <Label Text="Month C02" TextColor="#333333" FontSize="14" VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                            <Label Text="{Binding MonthCarbon}" TextColor="#333333" FontSize="16" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1" 
+                        BackgroundColor="#E0E0E0" 
+                        StrokeShape="RoundRectangle 10" 
+                        Stroke="Transparent" 
+                        Padding="15">
+                        <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                            <Image Source="material_crown.svg" WidthRequest="20" HeightRequest="20" />
+                            <Label Text="Level" TextColor="#333333" FontSize="16" />
+                            <Label Text="{Binding Level}" TextColor="#333333" FontSize="16" />
+                        </HorizontalStackLayout>
+                    </Border>
+                </Grid>
+
+                <VerticalStackLayout Margin="20,0,20,20" Spacing="8">
+                    <HorizontalStackLayout Spacing="5" VerticalOptions="End">
+                        <Label Text="Level up" TextColor="#333333" FontSize="16" FontAttributes="Bold" />
+
+                        <Label Text="{Binding NextLevelText}" TextColor="#555555" FontSize="12" VerticalOptions="End" Margin="0,0,0,2" />
+                    </HorizontalStackLayout>
+
+                    <ProgressBar Progress="{Binding ProgressRatio}" 
+                             ProgressColor="#2EAA1B" 
+                             BackgroundColor="#C8E6C9" 
+                             HeightRequest="20" />
+                </VerticalStackLayout>
+
+                <Border Margin="20,0,20,30" 
+                    BackgroundColor="#E0E0E0" 
+                    StrokeShape="RoundRectangle 10" 
+                    Stroke="Transparent" 
+                    Padding="15">
+                    <VerticalStackLayout Spacing="10">
+                        <Label Text="Carbon History" TextColor="#333333" FontSize="16" HorizontalOptions="Center" />
+
+                        <micro:ChartView x:Name="carbonChartView" Grid.Row="0" HeightRequest="150" Chart="{Binding MonthlyCarbonLineChart}" VerticalOptions="Start"/>
+
+                    </VerticalStackLayout>
+                </Border>
+                <Button Text="Logout" Command="{Binding LogoutCommand}"/>
+                <Button Text="Delete Account" Command="{Binding DeleteAccountCommand}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="{AppThemeBinding Light=White, Dark=#111827}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                           Color="#58C572" 
+                           WidthRequest="50" 
+                           HeightRequest="50" />
+                <Label Text="Loading..." 
+               TextColor="#6B7280" 
+               FontSize="16" 
+               FontAttributes="Bold" 
+               HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+    <!--<VerticalStackLayout>
+        <Label 
+            Text="Welcome to Profile!"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <ImageButton Source="material_cog.svg" Command="{Binding GoToSettingsPageCommand}"/>
+        
+        <Button Text="Logout" Command="{Binding LogoutCommand}"/>
+        <Button Text="Delete Account" Command="{Binding DeleteAccountCommand}"/>
+    </VerticalStackLayout>-->
+</ContentPage>

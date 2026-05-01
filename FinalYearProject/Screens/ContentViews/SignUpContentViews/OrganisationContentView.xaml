@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FinalYearProject.Screens.ContentViews.SignUpContentViews.OrganisationContentView">
+    <Grid>
+        <ScrollView IsVisible="{Binding IsContentVisible}">
+            <VerticalStackLayout Padding="20" Spacing="20">
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Account Type" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                        <Picker ItemsSource="{Binding AccountTypes}" 
+                            SelectedIndex="{Binding IsOrganisationMember, Converter={StaticResource PickerToBoolConverter}}"
+                            Title="Select account type..."
+                            BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Organisation" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                        <Picker ItemsSource="{Binding Organisations}" 
+                            ItemDisplayBinding="{Binding Path=Name}" 
+                            SelectedItem="{Binding SelectedOrganisation}"
+                            Title="Select your organisation..."
+                            BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="Team" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
+                        <Picker ItemsSource="{Binding Teams}" 
+                            ItemDisplayBinding="{Binding Path=Name}" 
+                            SelectedItem="{Binding SelectedTeam}"
+                            Title="Select your team..."
+                            BackgroundColor="Transparent"/>
+                    </Border>
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,15,0,0">
+                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigateBasicCommand}" BackgroundColor="Transparent" TextColor="#6B7280" BorderColor="#D1D5DB" BorderWidth="1.5"/>
+                    <Button Grid.Column="1" Text="Next" Command="{Binding NavigatePersonalCommand}"/>
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid IsVisible="{Binding IsBusy}" BackgroundColor="{AppThemeBinding Light=White, Dark=#111827}">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                   Color="#58C572" 
+                   WidthRequest="50" 
+                   HeightRequest="50" />
+                <Label Text="Loading..." 
+       TextColor="#6B7280" 
+       FontSize="16" 
+       FontAttributes="Bold" 
+       HorizontalOptions="Center" />
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentView>

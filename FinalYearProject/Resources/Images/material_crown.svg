@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- ####################################################################
+
+This file was generates automatically via the 
+IconPacks.Browser (MIT-License). 
+
+Visit https://github.com/MahApps/MahApps.Metro.IconPacks and 
+https://github.com/MahApps/MahApps.Metro.IconPacks/blob/develop/LICENSE 
+for more information.
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+Icon-Name: 			Crown
+Iconpack:			Material
+Iconpack-Homepage: 	https://pictogrammers.com/library/mdi/
+Iconpack-License:	https://github.com/Templarian/MaterialDesign?tab=License-1-ov-file#readme
+
+#####################################################################-->
+
+
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="48"
+     height="48">
+    <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z"
+          style="fill:#000000;
+                 stroke:none
+                 stroke-width:0;
+                 stroke-linecap:flat;
+                 stroke-linejoin:miter;"
+          transform="matrix(2.6666666666666665,0,0,2.6666666666666665,-8,-8)" />
+</svg>
