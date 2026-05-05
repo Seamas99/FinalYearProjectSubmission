@@ -72,6 +72,7 @@ namespace FinalYearProject.ViewModels
 
         [ObservableProperty]
         string distanceUnit;
+
         [ObservableProperty]
         string weightUnit;
 
@@ -155,7 +156,27 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
                 await GetVehicleAsync(ModelID, DistanceTravelled);
-                CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_g;
+
+                if (WeightUnit == "g")
+                {
+                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_g;
+                }
+                else if (WeightUnit == "lb")
+                {
+                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_lb;
+
+                }
+                else if (WeightUnit == "kg")
+                {
+                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_kg;
+
+                }
+                else if (WeightUnit == "mt")
+                {
+                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_mt;
+
+                }
+
                 foreach (Vehicle v in Vehicles)
                 {
                     Debug.WriteLine(v.data.attributes.carbon_g);
@@ -188,13 +209,40 @@ namespace FinalYearProject.ViewModels
             vehicle.data.attributes.vehicle_model = "Corolla";
             vehicle.data.attributes.vehicle_year = 1993;
             vehicle.data.attributes.vehicle_model_id = "7268a9b7-17e8-4c8d-acca-57059252afe9";
-            vehicle.data.attributes.distance_unit = "mi";
+            string distanceUnitMsg = "";
+            if (DistanceUnit == "km")
+            {
+                distanceUnitMsg = "km";
+            }
+            else
+            {
+                distanceUnitMsg = "mi";
+            }
+            vehicle.data.attributes.distance_unit = distanceUnitMsg;
             vehicle.data.attributes.estimated_at = DateTime.Parse("2021-01-10T15:24:32.568Z");
             vehicle.data.attributes.carbon_g = 37029;
             vehicle.data.attributes.carbon_lb = 81.64F;
             vehicle.data.attributes.carbon_kg = 37.03F;
             vehicle.data.attributes.carbon_mt = 0.04F;
-            CarbonGenerated = vehicle.data.attributes.carbon_g;
+            if (WeightUnit == "g")
+            {
+                CarbonGenerated = vehicle.data.attributes.carbon_g;
+            }
+            else if (WeightUnit == "lb")
+            {
+                CarbonGenerated = vehicle.data.attributes.carbon_lb;
+
+            }
+            else if (WeightUnit == "kg")
+            {
+                CarbonGenerated = vehicle.data.attributes.carbon_kg;
+
+            }
+            else if (WeightUnit == "mt")
+            {
+                CarbonGenerated = vehicle.data.attributes.carbon_mt;
+
+            }
             DistanceTravelled = 1000;
             await Shell.Current.GoToAsync($"/{nameof(Screens.CarbonCalculationResults)}", true);
         }
@@ -385,7 +433,18 @@ namespace FinalYearProject.ViewModels
                 IsContentVisible = false;
 
                 List<Vehicle> vehicles = new();
-                vehicles = await _carbonService.GetVehicles(modelID, "mi", distanceValue);
+
+                string distanceUnitMsg = "";
+                if (DistanceUnit.ToLower() == "km")
+                {
+                    distanceUnitMsg = "km";
+                }
+                else
+                {
+                    distanceUnitMsg = "mi";
+                }
+
+                vehicles = await _carbonService.GetVehicles(modelID, distanceUnitMsg, distanceValue);
 
                 if (Vehicles.Count != 0)
                     Vehicles.Clear();

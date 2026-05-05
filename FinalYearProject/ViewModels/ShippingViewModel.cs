@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FinalYearProject.ViewModels
 {
-    public partial class ShippingViewModel :BaseViewModel
+    public partial class ShippingViewModel : BaseViewModel
     {
         private readonly ICarbonService _carbonService;
         private readonly ISettingsService _settingsService;
@@ -60,9 +60,20 @@ namespace FinalYearProject.ViewModels
         {
             ShippingRequest shipping = new ShippingRequest();
             shipping.type = "shipping";
-            shipping.weight_unit = "kg";
+
+            shipping.weight_unit = WeightUnit.ToLower();
             shipping.weight_value = WeightValue;
-            shipping.distance_unit = "km";
+
+            string distanceUnitMsg = "";
+            if (DistanceUnit == "km")
+            {
+                distanceUnitMsg = "km";
+            }
+            else
+            {
+                distanceUnitMsg = "mi";
+            }
+            shipping.distance_unit = distanceUnitMsg;
             shipping.distance_value = Distance;
             shipping.transport_method = TransportMethod.ToLower();
 
@@ -110,7 +121,27 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
-                CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_g;
+                if (WeightUnit == "g")
+                {
+                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_g;
+                }
+                else if (WeightUnit == "lb")
+                {
+                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_lb;
+
+                }
+                else if (WeightUnit == "kg")
+                {
+                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_kg;
+
+                }
+                else if (WeightUnit == "mt")
+                {
+                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_mt;
+
+                }
+
+
                 foreach (Shipping s in ShippingList)
                 {
                     Debug.WriteLine(s.data.attributes.carbon_g);

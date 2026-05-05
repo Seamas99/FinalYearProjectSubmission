@@ -7,7 +7,7 @@
             <VerticalStackLayout Padding="20" Spacing="20">
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Email" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Email" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry Keyboard="Email" 
                            Text="{Binding Email}" 
@@ -18,7 +18,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Username" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Username" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry Text="{Binding Username}" 
                            Placeholder="Choose a username"
@@ -28,7 +28,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Password" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Password" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry IsPassword="True" 
                            Text="{Binding Password}" 

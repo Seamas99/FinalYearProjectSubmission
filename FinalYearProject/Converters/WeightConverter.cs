@@ -14,14 +14,14 @@ namespace FinalYearProject.Converters
             if (value is not double gram)
                 return value;
 
-            var unit = parameter as string ?? "grams";
+            var unit = parameter as string ?? "g";
 
             return unit.ToLower() switch
             {
-                "grams" => $"{gram:F1} km",
+                "g" => $"{gram:F1} km",
                 "lbs" => $"{gram * 0.002204623:F1} lbs",
-                "kilogram" => $"{gram * 0.001:F1} kg",
-                "metric tonne" => $"{gram * 0.000001:F1} mt"
+                "kg" => $"{gram * 0.001:F1} kg",
+                "mt" => $"{gram * 0.000001:F1} mt"
             };
         }
 

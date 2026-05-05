@@ -7,7 +7,7 @@
             <VerticalStackLayout Padding="20" Spacing="20">
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="First Name" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="First Name" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry Keyboard="Text" 
                            Text="{Binding FirstName}" 
@@ -17,7 +17,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Last Name" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Last Name" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry Keyboard="Text" 
                            Text="{Binding LastName}" 
@@ -27,14 +27,14 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Date of Birth" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Date of Birth" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <DatePicker Date="{Binding DateOfBirth}" BackgroundColor="Transparent"/>
                     </Border>
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Phone Number" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Phone Number" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry Keyboard="Telephone" 
                            Text="{Binding Phone}" 
@@ -44,7 +44,7 @@
                 </VerticalStackLayout>
 
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,15,0,0">
-                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigateOrganisationCommand}" BackgroundColor="Transparent" TextColor="#6B7280" BorderColor="#D1D5DB" BorderWidth="1.5"/>
+                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigateOrganisationCommand}" BackgroundColor="Transparent" TextColor="{StaticResource CarbonGreen}" BorderColor="{StaticResource CarbonGreen}" BorderWidth="1.5"/>
                     <Button Grid.Column="1" Text="Next" Command="{Binding NavigateLocationCommand}"/>
                 </Grid>
 

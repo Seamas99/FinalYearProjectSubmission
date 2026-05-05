@@ -81,12 +81,12 @@ namespace FinalYearProject.ViewModels
         #region DropDown Lists
         public List<string> WeightUnits { get; } = new()
         {
-            "grams", "lbs", "kilogram", "metric tonne"
+            "g", "lbs", "kg", "mt"
         };
 
         public List<string> DistanceUnits { get; } = new()
         {
-            "kilometre", "mile"
+            "km", "mile"
         };
 
         public List<string> AppThemes { get; } = new()

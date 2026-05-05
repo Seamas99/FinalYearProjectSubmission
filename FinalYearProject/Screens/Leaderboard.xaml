@@ -137,15 +137,31 @@
                           Padding="8,10"
                           BackgroundColor="{AppThemeBinding Light=White, Dark=#252535}">
 
+                        <Grid.Resources>
+                            <Style TargetType="Label">
+                                <Style.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Rank}" Value="1">
+                                        <Setter Property="TextColor" Value="#000000" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Rank}" Value="2">
+                                        <Setter Property="TextColor" Value="#000000" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Rank}" Value="3">
+                                        <Setter Property="TextColor" Value="#000000" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Resources>
+
                         <Grid.Triggers>
                             <DataTrigger TargetType="Grid" Binding="{Binding Rank}" Value="1">
-                                <Setter Property="BackgroundColor" Value="#FFF9C4"/>
+                                <Setter Property="BackgroundColor" Value="#FFD700"/>
                             </DataTrigger>
                             <DataTrigger TargetType="Grid" Binding="{Binding Rank}" Value="2">
-                                <Setter Property="BackgroundColor" Value="#F5F5F5"/>
+                                <Setter Property="BackgroundColor" Value="#C0C0C0"/>
                             </DataTrigger>
                             <DataTrigger TargetType="Grid" Binding="{Binding Rank}" Value="3">
-                                <Setter Property="BackgroundColor" Value="#FBE9D0"/>
+                                <Setter Property="BackgroundColor" Value="#CD7F32"/>
                             </DataTrigger>
                         </Grid.Triggers>
 

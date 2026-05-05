@@ -8,24 +8,38 @@
             <Border Stroke="#86EFAC" StrokeThickness="2" StrokeShape="RoundRectangle 12" BackgroundColor="#F0FDF4" Padding="20">
                 <VerticalStackLayout Spacing="5" HorizontalOptions="Center">
                     <Label Text="Carbon Generated" FontSize="14" TextColor="#166534" HorizontalOptions="Center" FontAttributes="Bold"/>
-                    <Label Text="{Binding CarbonGenerated, StringFormat='{}{0:N2} g'}" FontSize="28" TextColor="#15803D" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    <Label FontSize="28" TextColor="#15803D" FontAttributes="Bold" HorizontalOptions="Center">
+                        <Label.Text>
+                            <MultiBinding StringFormat="{}{0}{1}">
+                                <Binding Path="CarbonGenerated"/>
+                                <Binding Path="WeightUnit"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
                 </VerticalStackLayout>
             </Border>
 
-            <Border Stroke="#E5E7EB" StrokeThickness="1" StrokeShape="RoundRectangle 12" BackgroundColor="White" Padding="15">
+            <Border Style="{StaticResource RoundRectangle12Border}">
                 <VerticalStackLayout Spacing="12">
-                    <Label Text="Calculation Details" FontSize="16" FontAttributes="Bold" TextColor="#374151" Margin="0,0,0,5"/>
+                    <Label Text="Calculation Details" Style="{StaticResource SubtleTitleLabel}" Margin="0,0,0,5"/>
 
                     <Grid ColumnDefinitions="*, Auto">
-                        <Label Text="Estimate Type" TextColor="#6B7280" FontSize="14" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="Journey" FontAttributes="Bold" FontSize="14" TextColor="#374151" VerticalOptions="Center"/>
+                        <Label Text="Estimate Type" Style="{StaticResource SubtleLabel}" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Text="Journey" Style="{StaticResource SubtleLabel}" VerticalOptions="Center"/>
                     </Grid>
 
                     <BoxView HeightRequest="1" Color="#F3F4F6" />
 
                     <Grid ColumnDefinitions="*, Auto">
-                        <Label Text="Distance Travelled" TextColor="#6B7280" FontSize="14" VerticalOptions="Center"/>
-                        <Label Grid.Column="1" Text="{Binding DistanceTravelled, StringFormat='{}{0} mi'}" FontAttributes="Bold" FontSize="14" TextColor="#374151" VerticalOptions="Center"/>
+                        <Label Text="Distance Travelled" Style="{StaticResource SubtleLabel}" VerticalOptions="Center"/>
+                        <Label Grid.Column="1" Style="{StaticResource SubtleLabel}" VerticalOptions="Center">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="DistanceTravelled"/>
+                                    <Binding Path="DistanceUnit"/>
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
                     </Grid>
                 </VerticalStackLayout>
             </Border>

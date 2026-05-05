@@ -14,18 +14,18 @@ namespace FinalYearProject.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values[0] is not double kilometres)
+            if (values[0] is not double kms)
                 return values[0];
 
             if (values[1] is not string unit)
-                unit = "kilometre";
+                unit = "km";
 
 
             return unit.ToLower() switch
             {
-                "kilometre" => $"{kilometres:F1} km",
-                "mile" => $"{kilometres * 0.6213712:F1} mi",
-                _ => $"{kilometres:F1} km"
+                "km" => $"{kms:F1} km",
+                "mile" => $"{kms * 0.6213712:F1} mi",
+                _ => $"{kms:F1} km"
             };
         }
 

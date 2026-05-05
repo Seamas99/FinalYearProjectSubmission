@@ -1,5 +1,7 @@
-﻿using FinalYearProject.Database;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using FinalYearProject.Database;
 using FinalYearProject.Interfaces;
+using FinalYearProject.Messages;
 using FinalYearProject.Screens;
 using FinalYearProject.Screens.ContentViews;
 using FinalYearProject.Screens.ContentViews.CalculationEntry;
@@ -35,8 +37,8 @@ namespace FinalYearProject.ViewModels
                 IsContentVisible = false;
 
                 VehicleVM = new VehicleViewModel(_carbonService, _settingsService);
-                ElectricityVM = new ElectricityViewModel(_carbonService);
-                FlightVM = new FlightViewModel(_carbonService);
+                ElectricityVM = new ElectricityViewModel(_carbonService, _settingsService);
+                FlightVM = new FlightViewModel(_carbonService, _settingsService);
                 ShippingVM = new ShippingViewModel(_carbonService, _settingsService);
 
                 VehicleECV = new VehicleEntryContentView(VehicleVM);
@@ -164,6 +166,8 @@ namespace FinalYearProject.ViewModels
             bool positionResult = await leaderboardHelper.UpdatePositionInDatabase(position);
 
             await Shell.Current.GoToAsync($"/{nameof(Screens.CalculationSelectionScreen)}", true);
+
+            WeakReferenceMessenger.Default.Send(new ChartsUpdatedMessage());
 
             IsBusy = false;
             IsContentVisible = true;

@@ -18,7 +18,8 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Package Weight (kg)" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="{Binding WeightUnit, StringFormat='Package Weight ({0})'}" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry Keyboard="Numeric" 
                            Text="{Binding WeightValue}"

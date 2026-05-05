@@ -1,18 +1,19 @@
-﻿using FinalYearProject.Services;
-using FinalYearProject.ViewModels;
-using Microsoft.Extensions.Logging;
-using Microcharts.Maui;
-using FinalYearProject.Screens;
+﻿using CommunityToolkit;
+using CommunityToolkit.Maui;
+using FinalYearProject.Database;
 using FinalYearProject.Interfaces;
+using FinalYearProject.Screens;
 using FinalYearProject.Screens.ContentViews;
 using FinalYearProject.Screens.ContentViews.CalculationEntry;
 using FinalYearProject.Screens.ContentViews.CalculationResults;
+using FinalYearProject.Screens.ContentViews.SignUpContentViews;
+using FinalYearProject.Services;
+using FinalYearProject.ViewModels;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Firebase.Auth.Repository;
-using FinalYearProject.Screens.ContentViews.SignUpContentViews;
-using FinalYearProject.Database;
-using CommunityToolkit;
+using Microcharts.Maui;
+using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Toolkit;
 using Syncfusion.Maui.Toolkit.Hosting;
 
@@ -26,6 +27,7 @@ namespace FinalYearProject
             builder
                 .UseMauiApp<App>()
                 .UseMicrocharts()
+                .UseMauiCommunityToolkit()
                 .ConfigureSyncfusionToolkit()
                 .ConfigureFonts(fonts =>
                 {

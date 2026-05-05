@@ -1,18 +1,23 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using FinalYearProject.Database;
+using FinalYearProject.Helper;
+using FinalYearProject.Interfaces;
+using FinalYearProject.Messages;
+using FinalYearProject.Services;
+using Microsoft.Maui.Devices.Sensors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FinalYearProject.Database;
-using FinalYearProject.Helper;
-using FinalYearProject.Services;
-using FinalYearProject.Interfaces;
 
 namespace FinalYearProject.ViewModels
 {
     public partial class ElectricityViewModel : BaseViewModel
     {
         private readonly ICarbonService _carbonService;
+        private readonly ISettingsService _settingsService;
+
 
         [ObservableProperty]
         private bool isBusy = false;
@@ -20,13 +25,29 @@ namespace FinalYearProject.ViewModels
         [ObservableProperty]
         private bool isContentVisible = true;
 
-        public ElectricityViewModel(ICarbonService carbonService)
+        public ElectricityViewModel(ICarbonService carbonService, ISettingsService settingsService)
         {
             _carbonService = carbonService;
+            _settingsService = settingsService;
+
+            WeakReferenceMessenger.Default.Register<SettingsChangedMessage>(this, (recipient, message) =>
+            {
+                DistanceUnit = _settingsService.DistanceUnit;
+                WeightUnit = _settingsService.WeightUnit;
+            });
+
+            DistanceUnit = _settingsService.DistanceUnit;
+            WeightUnit = _settingsService.WeightUnit;
+            _settingsService = settingsService;
         }
 
         public ObservableCollection<Electricity> ElectricityList { get; } = new();
 
+        [ObservableProperty]
+        string distanceUnit;
+
+        [ObservableProperty]
+        string weightUnit;
 
         [ObservableProperty]
         float carbonGenerated;
@@ -86,7 +107,26 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
-                CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_g;
+                if (WeightUnit == "g")
+                {
+                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_g;
+                }
+                else if (WeightUnit == "lb")
+                {
+                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_lb;
+
+                }
+                else if (WeightUnit == "kg")
+                {
+                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_kg;
+
+                }
+                else if (WeightUnit == "mt")
+                {
+                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_mt;
+
+                }
+
                 foreach (Electricity e in ElectricityList)
                 {
                     Debug.WriteLine(e.data.attributes.carbon_g);

@@ -375,47 +375,57 @@ namespace FinalYearProject.ViewModels
 
         private async Task<Profile> ReturnProfile()
         {
-            Profile profile = new();
-            profile.Username = Username;
-            profile.Email = Email;
-            profile.JoinDate = currentDate;
-            profile.IsOrganisationMember = IsOrganisationMember;
-
-            if (isOrganisationMember)
+            try
             {
-                profile.OrganisationID = SelectedOrganisation.Id;
-                profile.OrganisationName = SelectedOrganisation.Name;
-                profile.OrganisationTeamID = SelectedTeam.Id;
-                profile.OrganisationTeamName = SelectedTeam.Name;
+                Profile profile = new();
+                profile.Username = Username;
+                profile.Email = Email;
+                profile.JoinDate = currentDate;
+                profile.IsOrganisationMember = IsOrganisationMember;
+
+                if (isOrganisationMember)
+                {
+                    profile.OrganisationID = SelectedOrganisation.Id;
+                    profile.OrganisationName = SelectedOrganisation.Name;
+                    profile.OrganisationTeamID = SelectedTeam.Id;
+                    profile.OrganisationTeamName = SelectedTeam.Name;
+                }
+
+                profile.DateOfBirth = DateOfBirth.ToUniversalTime();
+                profile.Age = CalculateAge(profile.DateOfBirth);
+                profile.FirstName = FirstName;
+                profile.LastName = LastName;
+                profile.PhoneNumber = Phone;
+
+                profile.Country = SelectedCountry.name;
+                profile.Region = Region;
+                profile.Area = Area;
+                profile.City = City;
+                profile.Postcode = Postcode;
+
+                profile.HouseholdSize = HouseholdSize;
+                profile.HomeType = HomeType;
+                profile.HeatingType = HeatingType;
+                profile.ExtraInsulation = ExtraInsulation;
+                profile.SolarInstalled = SolarInstalled;
+                profile.VehicleOwnership = VehicleOwnership;
+
+                profile.PreferredCommuteType = PreferredCommuteType;
+                profile.DietaryPreference = DietaryPreference;
+                if (VehicleOwnership)
+                {
+                    profile.VehicleList = VehicleList.ToList();
+                }
+
+                return profile;
             }
-
-            profile.DateOfBirth = DateOfBirth.ToUniversalTime();
-            profile.Age = CalculateAge(profile.DateOfBirth);
-            profile.FirstName = FirstName;
-            profile.LastName = LastName;
-            profile.PhoneNumber = Phone;
-
-            profile.Country = SelectedCountry.name;
-            profile.Region = Region;
-            profile.Area = Area;
-            profile.City = City;
-            profile.Postcode = Postcode;
-
-            profile.HouseholdSize = HouseholdSize;
-            profile.HomeType = HomeType;
-            profile.HeatingType = HeatingType;
-            profile.ExtraInsulation = ExtraInsulation;
-            profile.SolarInstalled = SolarInstalled;
-            profile.VehicleOwnership = VehicleOwnership;
-
-            profile.PreferredCommuteType = PreferredCommuteType;
-            profile.DietaryPreference = DietaryPreference;
-            if (VehicleOwnership)
+            catch (Exception ex)
             {
-                profile.VehicleList = VehicleList.ToList();
+                Debug.WriteLine(ex);
+                await Shell.Current.DisplayAlert("Please check all values are filled in!",
+                    "Error!", "OK");
             }
-
-            return profile;
+            return null;
         }
 
         private async Task<Profile> ReturnTestProfile()

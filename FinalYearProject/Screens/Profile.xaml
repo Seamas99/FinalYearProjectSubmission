@@ -5,6 +5,7 @@
              x:Name="ProfilePage"
              xmlns:micro="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
              Shell.TabBarIsVisible="True"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:viewmodel="clr-namespace:FinalYearProject.ViewModels"
              x:DataType="viewmodel:ProfileViewModel">
     <Shell.TitleView>
@@ -51,15 +52,18 @@
                        Aspect="AspectFill" />
 
                     <ImageButton Grid.Row="1"
-                             Source="material_cog.svg"
                              HorizontalOptions="End"
                              VerticalOptions="Start"
                              Command="{Binding GoToSettingsPageCommand}"
                              Margin="15"
                              WidthRequest="24"
-                             HeightRequest="24" />
+                             HeightRequest="24" >
+                        <ImageButton.Source>
+                            <AppThemeBinding Light="material_cog_light.svg" Dark="material_cog_dark.svg" />
+                        </ImageButton.Source>
+                    </ImageButton>
 
-                    <Grid Grid.Row="0" Grid.RowSpan="2" 
+                        <Grid Grid.Row="0" Grid.RowSpan="2" 
                       Margin="0,100,0,0" 
                       HorizontalOptions="Center" 
                       VerticalOptions="End">
@@ -72,67 +76,70 @@
                                Aspect="AspectFill"/>
                         </Border>
 
-                        <ImageButton Source="material_tray_arrow_up.svg"
-                                 HorizontalOptions="End"
+                        <ImageButton HorizontalOptions="End"
                                  VerticalOptions="End"
                                  Margin="0,0,-15,10"
                                  WidthRequest="28"
                                  HeightRequest="28" 
-                                 Command="{Binding UploadProfilePictureCommand}"/>
+                                 Command="{Binding UploadProfilePictureCommand}">
+                            <ImageButton.Source>
+                                <AppThemeBinding Light="material_tray_arrow_up_light.svg" Dark="material_tray_arrow_up_dark.svg" />
+                            </ImageButton.Source>
+                        </ImageButton>
                     </Grid>
                 </Grid>
 
                 <VerticalStackLayout Spacing="2" Margin="0,0,0,20">
                     <Label Text="{Binding DisplayName}" 
-                       FontSize="22" 
-                       FontAttributes="Bold" 
-                       HorizontalOptions="Center" 
-                       TextColor="#333333" />
+                           Style="{StaticResource BigTitle}"/>
                     <HorizontalStackLayout HorizontalOptions="Center">
-                        <Label Text="Join Date:"
-                           FontSize="12" 
-                           TextColor="#666666"/>
-                        <Label Text="{Binding JoinDate}" 
-                           FontSize="12" 
-                           TextColor="#666666" />
+                        <Label Text="Join Date:" Style="{StaticResource SubtleLabel}"/>
+                        <Label Text="{Binding JoinDate}" Style="{StaticResource SubtleLabel}"/>
                     </HorizontalStackLayout>
 
                 </VerticalStackLayout>
 
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="20,0,20,20">
 
-                    <Border Grid.Column="0" 
-                        BackgroundColor="#E0E0E0" 
-                        StrokeShape="RoundRectangle 10" 
-                        Stroke="Transparent" 
-                        Padding="15">
+                    <Border Grid.Column="0" Style="{StaticResource CardRoundRectangle10}">
                         <VerticalStackLayout Spacing="10">
                             <HorizontalStackLayout Spacing="5" HorizontalOptions="Start">
-                                <Image Source="material_leaf.svg" WidthRequest="18" HeightRequest="18" VerticalOptions="Center"/>
-                                <Label Text="Month C02" TextColor="#333333" FontSize="14" VerticalOptions="Center" />
+                                <Image WidthRequest="18" HeightRequest="18" VerticalOptions="Center">
+                                    <Image.Source>
+                                        <AppThemeBinding Light="material_leaf_light.svg" Dark="material_leaf_dark.svg" />
+                                    </Image.Source>
+                                </Image>
+                                <Label Text="Month C02" Style="{StaticResource CardLabel}" VerticalOptions="Center" />
                             </HorizontalStackLayout>
-                            <Label Text="{Binding MonthCarbon}" TextColor="#333333" FontSize="16" HorizontalOptions="Center" />
+                            <Label Style="{StaticResource CardLabel}" HorizontalOptions="Center">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}{1}">
+                                        <Binding Path="MonthCarbon"/>
+                                        <Binding Path="WeightUnit"/>
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
                         </VerticalStackLayout>
                     </Border>
 
-                    <Border Grid.Column="1" 
-                        BackgroundColor="#E0E0E0" 
-                        StrokeShape="RoundRectangle 10" 
-                        Stroke="Transparent" 
-                        Padding="15">
+                    <Border Grid.Column="1" Style="{StaticResource CardRoundRectangle10}">
                         <HorizontalStackLayout Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
-                            <Image Source="material_crown.svg" WidthRequest="20" HeightRequest="20" />
-                            <Label Text="Level" TextColor="#333333" FontSize="16" />
-                            <Label Text="{Binding Level}" TextColor="#333333" FontSize="16" />
+                            <Image WidthRequest="20" HeightRequest="20" >
+                                <Image.Source>
+                                    <AppThemeBinding Light="material_crown_light.svg" Dark="material_crown_dark.svg" />
+                                </Image.Source>
+                            </Image>
+                            <Label Text="Level" Style="{StaticResource CardLabel}" />
+                            <Label Text="{Binding Level}" Style="{StaticResource CardLabel}" />
                         </HorizontalStackLayout>
                     </Border>
                 </Grid>
 
                 <VerticalStackLayout Margin="20,0,20,20" Spacing="8">
                     <HorizontalStackLayout Spacing="5" VerticalOptions="End">
-                        <Label Text="Level up" TextColor="#333333" FontSize="16" FontAttributes="Bold" />
+                        <Label Text="Level up" Style="{StaticResource CardLabel}" />
 
-                        <Label Text="{Binding NextLevelText}" TextColor="#555555" FontSize="12" VerticalOptions="End" Margin="0,0,0,2" />
+                        <Label Text="{Binding NextLevelText}" Style="{StaticResource SubtleLabel}" VerticalOptions="End" Margin="0,0,0,2" />
                     </HorizontalStackLayout>
 
                     <ProgressBar Progress="{Binding ProgressRatio}" 
@@ -142,10 +149,7 @@
                 </VerticalStackLayout>
 
                 <Border Margin="20,0,20,30" 
-                    BackgroundColor="#E0E0E0" 
-                    StrokeShape="RoundRectangle 10" 
-                    Stroke="Transparent" 
-                    Padding="15">
+                        Style="{StaticResource MicroChartsCard}">
                     <VerticalStackLayout Spacing="10">
                         <Label Text="Carbon History" TextColor="#333333" FontSize="16" HorizontalOptions="Center" />
 
@@ -165,10 +169,8 @@
                            WidthRequest="50" 
                            HeightRequest="50" />
                 <Label Text="Loading..." 
-               TextColor="#6B7280" 
-               FontSize="16" 
-               FontAttributes="Bold" 
-               HorizontalOptions="Center" />
+                       Style="{StaticResource SubtleLabel}"
+                       FontSize="16"/>
             </VerticalStackLayout>
         </Grid>
     </Grid>

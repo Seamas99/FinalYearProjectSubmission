@@ -38,10 +38,7 @@
     <Grid>
         <ScrollView IsVisible="{Binding IsContentVisible}">
             <VerticalStackLayout Padding="20" Spacing="25">
-                <Label Text="Active Alerts"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="Black"/>
+                <Label Text="Active Alerts" Style="{StaticResource BigTitle}"/>
                 <CollectionView x:Name="AlertsCollectionView" ItemsSource="{Binding ActiveAlerts}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="model:Alert">
@@ -74,10 +71,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
-                <Label Text="Dismissed Alerts"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="Black"/>
+                <Label Text="Dismissed Alerts" Style="{StaticResource BigTitle}"/>
 
                 <CollectionView x:Name="DismissedAlertsCollectionView" ItemsSource="{Binding DismissedAlerts}">
                     <CollectionView.ItemTemplate>

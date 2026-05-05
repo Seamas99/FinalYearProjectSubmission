@@ -7,7 +7,7 @@
             <VerticalStackLayout Padding="20" Spacing="20">
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Preferred Commute Method" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Preferred Commute Method" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Picker ItemsSource="{Binding CommuteTypes}" 
                             SelectedItem="{Binding PreferredCommuteType}"
@@ -17,7 +17,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Dietary Preference" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Dietary Preference" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Picker ItemsSource="{Binding DietaryPreferences}" 
                             SelectedItem="{Binding DietaryPreference}"
@@ -27,7 +27,7 @@
                 </VerticalStackLayout>
 
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,30,0,0">
-                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigateHouseholdCommand}" BackgroundColor="Transparent" TextColor="#6B7280" BorderColor="#D1D5DB" BorderWidth="1.5"/>
+                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigateHouseholdCommand}" BackgroundColor="Transparent" TextColor="{StaticResource CarbonGreen}" BorderColor="{StaticResource CarbonGreen}" BorderWidth="1.5"/>
                     <Button Grid.Column="1" Text="Complete Sign Up" Command="{Binding SignUpCommand}"/>
                 </Grid>
 

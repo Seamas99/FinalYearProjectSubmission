@@ -43,15 +43,11 @@
         <ScrollView IsVisible="{Binding IsContentVisible}">
             <VerticalStackLayout Padding="20" Spacing="25">
 
-                <Border Stroke="#E5E7EB" 
-                    StrokeThickness="1" 
-                    StrokeShape="RoundRectangle 12" 
-                    BackgroundColor="White" 
-                    Padding="20">
+                <Border Style="{StaticResource RoundRectangle12Border}">
                     <VerticalStackLayout Spacing="20">
 
                         <VerticalStackLayout Spacing="6">
-                            <Label Text="Distance Unit" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                            <Label Text="Distance Unit" Style="{StaticResource SubtleLabel}"/>
                             <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                                 <Picker ItemsSource="{Binding DistanceUnits}" 
                                     SelectedItem="{Binding SelectedDistanceUnit}" 
@@ -61,7 +57,7 @@
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="6">
-                            <Label Text="Weight Unit" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                            <Label Text="Weight Unit" Style="{StaticResource SubtleLabel}"/>
                             <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                                 <Picker ItemsSource="{Binding WeightUnits}" 
                                     SelectedItem="{Binding SelectedWeightUnit}" 
@@ -71,7 +67,7 @@
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="6">
-                            <Label Text="App Theme" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                            <Label Text="App Theme" Style="{StaticResource SubtleLabel}"/>
                             <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                                 <Picker ItemsSource="{Binding AppThemes}" 
                                     SelectedItem="{Binding SelectedAppTheme}" 

@@ -7,7 +7,7 @@
             <VerticalStackLayout Padding="20" Spacing="20">
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Account Type" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Account Type" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Picker ItemsSource="{Binding AccountTypes}" 
                             SelectedIndex="{Binding IsOrganisationMember, Converter={StaticResource PickerToBoolConverter}}"
@@ -17,7 +17,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Organisation" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Organisation" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Picker ItemsSource="{Binding Organisations}" 
                             ItemDisplayBinding="{Binding Path=Name}" 
@@ -28,7 +28,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Team" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Team" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Picker ItemsSource="{Binding Teams}" 
                             ItemDisplayBinding="{Binding Path=Name}" 
@@ -39,7 +39,7 @@
                 </VerticalStackLayout>
 
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,15,0,0">
-                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigateBasicCommand}" BackgroundColor="Transparent" TextColor="#6B7280" BorderColor="#D1D5DB" BorderWidth="1.5"/>
+                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigateBasicCommand}" BackgroundColor="Transparent" TextColor="{StaticResource CarbonGreen}" BorderColor="{StaticResource CarbonGreen}" BorderWidth="1.5"/>
                     <Button Grid.Column="1" Text="Next" Command="{Binding NavigatePersonalCommand}"/>
                 </Grid>
 

@@ -6,7 +6,7 @@
         <VerticalStackLayout Spacing="15" IsVisible="{Binding IsContentVisible}">
 
             <VerticalStackLayout Spacing="6">
-                <Label Text="Departure Airport" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                <Label Text="Departure Airport" Style="{StaticResource SubtleLabel}"/>
                 <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                     <Picker ItemsSource="{Binding AirportsList}" 
                         ItemDisplayBinding="{Binding Path=name}" 
@@ -17,7 +17,7 @@
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="6">
-                <Label Text="Arrival Airport" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                <Label Text="Arrival Airport" Style="{StaticResource SubtleLabel}" />
                 <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                     <Picker ItemsSource="{Binding AirportsList}" 
                         ItemDisplayBinding="{Binding Path=name}" 
@@ -28,7 +28,7 @@
             </VerticalStackLayout>
 
             <VerticalStackLayout Spacing="6">
-                <Label Text="Cabin Class" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                <Label Text="Cabin Class" Style="{StaticResource SubtleLabel}" />
                 <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                     <Picker ItemsSource="{Binding CabinClasses}" 
                         SelectedItem="{Binding CabinClass, Mode=TwoWay}"

@@ -40,10 +40,7 @@
             <VerticalStackLayout Padding="20" Spacing="25">
 
                 <!-- Uncompleted Challenges -->
-                <Label Text="Uncompleted Challenges"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   TextColor="Black"/>
+                <Label Text="Uncompleted Challenges" Style="{StaticResource BigTitle}"/>
 
                 <CollectionView ItemsSource="{Binding UncompletedChallenges}">
                     <CollectionView.ItemTemplate>
@@ -81,11 +78,7 @@
                 </CollectionView>
 
                 <!-- Completed Challenges -->
-                <Label Text="Completed Challenges"
-                   FontSize="22"
-                   FontAttributes="Bold"
-                   Margin="0,20,0,0"
-                   TextColor="Black"/>
+                <Label Text="Completed Challenges" Style="{StaticResource BigTitle}"/>
 
                 <CollectionView ItemsSource="{Binding CompletedChallenges}">
                     <CollectionView.ItemTemplate>

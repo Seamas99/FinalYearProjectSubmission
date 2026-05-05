@@ -1,19 +1,24 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using FinalYearProject.Database;
+using FinalYearProject.Helper;
+using FinalYearProject.Interfaces;
+using FinalYearProject.Messages;
+using FinalYearProject.Screens.ContentViews.CalculationEntry;
+using FinalYearProject.Services;
+using Microsoft.Maui.Devices.Sensors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FinalYearProject.Database;
-using FinalYearProject.Helper;
-using FinalYearProject.Services;
-using FinalYearProject.Interfaces;
-using FinalYearProject.Screens.ContentViews.CalculationEntry;
 
 namespace FinalYearProject.ViewModels
 {
     public partial class FlightViewModel : BaseViewModel
     {
         private readonly ICarbonService _carbonService;
+        private readonly ISettingsService _settingsService;
+
 
         [ObservableProperty]
         private bool isBusy = false;
@@ -21,11 +26,21 @@ namespace FinalYearProject.ViewModels
         [ObservableProperty]
         private bool isContentVisible = true;
 
-        public FlightViewModel(ICarbonService carbonService)
+        public FlightViewModel(ICarbonService carbonService, ISettingsService settingsService)
         {
             _carbonService = carbonService;
+            _settingsService = settingsService;
             FlightLeg = new FlightLegEntryContentView(this);
             Nav = new Navigator<Leg>(Legs);
+
+            WeakReferenceMessenger.Default.Register<SettingsChangedMessage>(this, (recipient, message) =>
+            {
+                DistanceUnit = _settingsService.DistanceUnit;
+                WeightUnit = _settingsService.WeightUnit;
+            });
+
+            DistanceUnit = _settingsService.DistanceUnit;
+            WeightUnit = _settingsService.WeightUnit;
             _ = PopulateAiports();
         }
 
@@ -36,6 +51,12 @@ namespace FinalYearProject.ViewModels
         public ObservableCollection<Airport> FilteredAirportsList { get; } = new();
 
         [ObservableProperty]
+        string distanceUnit;
+
+        [ObservableProperty]
+        string weightUnit;
+
+        [ObservableProperty]
         float carbonGenerated;
 
         [ObservableProperty]
@@ -43,6 +64,9 @@ namespace FinalYearProject.ViewModels
 
         [ObservableProperty]
         int passengers;
+
+        [ObservableProperty]
+        int flightLegs;
 
         [ObservableProperty]
         Airport departureAirport;
@@ -150,6 +174,7 @@ namespace FinalYearProject.ViewModels
             }
             flight.legs = legRequests.ToArray();
 
+            FlightLegs = flight.legs.Count();
             return flight;
         }
 
@@ -194,7 +219,26 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
-                CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_g;
+                if (WeightUnit == "g")
+                {
+                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_g;
+                }
+                else if (WeightUnit == "lb")
+                {
+                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_lb;
+
+                }
+                else if (WeightUnit == "kg")
+                {
+                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_kg;
+
+                }
+                else if (WeightUnit == "mt")
+                {
+                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_mt;
+
+                }
+
                 foreach (Flight f in Flights)
                 {
                     Debug.WriteLine(f.data.attributes.carbon_g);

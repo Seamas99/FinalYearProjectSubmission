@@ -25,7 +25,7 @@ namespace FinalYearProject.Services
 
         public string WeightUnit
         {
-            get => Preferences.Default.Get(nameof(WeightUnit), "grams");
+            get => Preferences.Default.Get(nameof(WeightUnit), "g");
             set => Preferences.Default.Set(nameof(WeightUnit), value);
         }
 
@@ -59,7 +59,7 @@ namespace FinalYearProject.Services
         {
             Settings settings = new Settings();
             settings.DistanceUnit = "mile";
-            settings.WeightUnit = "grams";
+            settings.WeightUnit = "g";
             settings.Theme = "System";
             CreateSettings(settings);
             return settings;

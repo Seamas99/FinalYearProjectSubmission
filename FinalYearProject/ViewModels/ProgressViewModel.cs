@@ -1,19 +1,21 @@
-﻿using Firebase.Auth;
-using FinalYearProject.Interfaces;
-using FinalYearProject.Helper;
+﻿using CommunityToolkit.Mvvm.Messaging;
 using FinalYearProject.Database;
+using FinalYearProject.Helper;
+using FinalYearProject.Interfaces;
+using FinalYearProject.Messages;
 using FinalYearProject.Model;
 using FinalYearProject.Services;
+using Firebase.Auth;
+using Microcharts;
+using Microcharts.Maui;
+using SkiaSharp;
+using Syncfusion.Maui.Toolkit;
+using Syncfusion.Maui.Toolkit.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Syncfusion.Maui.Toolkit;
-using Syncfusion.Maui.Toolkit.Hosting;
-using Microcharts.Maui;
-using SkiaSharp;
-using Microcharts;
 
 namespace FinalYearProject.ViewModels
 {
@@ -51,6 +53,11 @@ namespace FinalYearProject.ViewModels
                 IsBusy = false;
                 IsContentVisible = true;
             }
+
+            WeakReferenceMessenger.Default.Register<ChartsUpdatedMessage>(this, (recipient, message) =>
+            {
+                _ = InitialiseAsync();
+            });
         }
 
         private async Task InitialiseAsync()
@@ -392,70 +399,112 @@ namespace FinalYearProject.ViewModels
                     Color = GetColorForType(t.Type)
                 }).ToList();
 
-            // Build the chart
-            MonthlyCarbonLineChart = new LineChart
+            // Build or Update the charts
+            if (MonthlyCarbonLineChart == null)
             {
-                Entries = monthlyCarbonEntries,
-                LabelTextSize = 30f,
-                BackgroundColor = SKColor.Empty,
-                LineMode = LineMode.Straight,
-                LineSize = 6,
-                PointSize = 12,
-                IsAnimated = false
-            };
+                MonthlyCarbonLineChart = new LineChart
+                {
+                    Entries = monthlyCarbonEntries,
+                    LabelTextSize = 30f,
+                    BackgroundColor = SKColors.White,
+                    LineMode = LineMode.Straight,
+                    LineSize = 6,
+                    PointSize = 12,
+                    IsAnimated = true
+                };
+            }
+            else
+            {
+                MonthlyCarbonLineChart.Entries = monthlyCarbonEntries;
+            }
 
-            MonthlyXPLineChart = new LineChart
+            if (MonthlyXPLineChart == null)
             {
-                Entries = monthlyXpEntries,
-                LabelTextSize = 30f,
-                BackgroundColor = SKColor.Empty,
-                LineMode = LineMode.Straight,
-                LineSize = 6,
-                PointSize = 12,
-                IsAnimated = false
-            };
+                MonthlyXPLineChart = new LineChart
+                {
+                    Entries = monthlyXpEntries,
+                    LabelTextSize = 30f,
+                    BackgroundColor = SKColors.White,
+                    LineMode = LineMode.Straight,
+                    LineSize = 6,
+                    PointSize = 12,
+                    IsAnimated = true
+                };
+            }
+            else
+            {
+                MonthlyXPLineChart.Entries = monthlyXpEntries;
+            }
 
-            MonthlyLevelLineChart = new LineChart
+            if (MonthlyLevelLineChart == null)
             {
-                Entries = monthlyLevelEntries,
-                LabelTextSize = 30f,
-                BackgroundColor = SKColor.Empty,
-                LineMode = LineMode.Straight,
-                LineSize = 6,
-                PointSize = 12,
-                IsAnimated = false
-            };
+                MonthlyLevelLineChart = new LineChart
+                {
+                    Entries = monthlyLevelEntries,
+                    LabelTextSize = 30f,
+                    BackgroundColor = SKColors.White,
+                    LineMode = LineMode.Straight,
+                    LineSize = 6,
+                    PointSize = 12,
+                    IsAnimated = true
+                };
+            }
+            else
+            {
+                MonthlyLevelLineChart.Entries = monthlyLevelEntries;
+            }
 
-            MonthlyRankLineChart = new LineChart
+            if (MonthlyRankLineChart == null)
             {
-                Entries = monthlyRankEntries,
-                LabelTextSize = 30f,
-                BackgroundColor = SKColor.Empty,
-                LineMode = LineMode.Straight,
-                LineSize = 6,
-                PointSize = 12,
-                IsAnimated = false
-            };
+                MonthlyRankLineChart = new LineChart
+                {
+                    Entries = monthlyRankEntries,
+                    LabelTextSize = 30f,
+                    BackgroundColor = SKColors.White,
+                    LineMode = LineMode.Straight,
+                    LineSize = 6,
+                    PointSize = 12,
+                    IsAnimated = true
+                };
+            }
+            else
+            {
+                MonthlyRankLineChart.Entries = monthlyRankEntries;
+            }
 
-            MonthlyLeagueNumberLineChart = new LineChart
+            if (MonthlyLeagueNumberLineChart == null)
             {
-                Entries = monthlyLeagueNumberEntries,
-                LabelTextSize = 30f,
-                BackgroundColor = SKColor.Empty,
-                LineMode = LineMode.Straight,
-                LineSize = 6,
-                PointSize = 12,
-                IsAnimated = false
-            };
+                MonthlyLeagueNumberLineChart = new LineChart
+                {
+                    Entries = monthlyLeagueNumberEntries,
+                    LabelTextSize = 30f,
+                    BackgroundColor = SKColors.White,
+                    LineMode = LineMode.Straight,
+                    LineSize = 6,
+                    PointSize = 12,
+                    IsAnimated = true
+                };
+            }
+            else
+            {
+                MonthlyLeagueNumberLineChart.Entries = monthlyLeagueNumberEntries;
+            }
 
-            MonthlyCarbonSourceDonutChart = new DonutChart
+            if (MonthlyCarbonSourceDonutChart == null)
             {
-                Entries = monthlyPercentageEntries,
-                HoleRadius = 0.6f,
-                LabelTextSize = 32f,
-                BackgroundColor = SKColor.Empty,
-                IsAnimated = false
-            };
+                MonthlyCarbonSourceDonutChart = new DonutChart
+                {
+                    Entries = monthlyPercentageEntries,
+                    HoleRadius = 0.6f,
+                    LabelTextSize = 32f,
+                    BackgroundColor = SKColors.White,
+                    IsAnimated = true
+                };
+            }
+            else
+            {
+                MonthlyCarbonSourceDonutChart.Entries = monthlyPercentageEntries;
+            }
 
             if (monthlyCarbon.Any())
             {
@@ -566,10 +615,10 @@ namespace FinalYearProject.ViewModels
         {
             return type switch
             {
-                "Flight" => SKColor.Parse("#e74c3c"),
-                "Vehicle" => SKColor.Parse("#3498db"),
-                "Electricity" => SKColor.Parse("#2ecc71"),
-                "Shipping" => SKColor.Parse("#2ecc71"),
+                "Flight" => SKColor.Parse("#b455b6"),
+                "Vehicle" => SKColor.Parse("#2c3e50"),
+                "Electricity" => SKColor.Parse("#77d065"),
+                "Shipping" => SKColor.Parse("#3498db"),
                 _ => SKColor.Parse("#9b59b6")
             };
         }

@@ -1,11 +1,14 @@
-﻿using FinalYearProject.Database;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using FinalYearProject.Database;
 using FinalYearProject.Helper;
 using FinalYearProject.Interfaces;
+using FinalYearProject.Messages;
 using FinalYearProject.Services;
 using Firebase.Auth;
 using Firebase.Auth.Providers;
 using Microcharts;
 using Microsoft.Maui.Controls;
+using Microsoft.Maui.Devices.Sensors;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -22,9 +25,16 @@ namespace FinalYearProject.ViewModels
         private readonly IProfileService _profileService;
         private readonly IMapBoxService _mapBoxService;
         private readonly ICarbonService _carbonService;
+        private readonly ISettingsService _settingsService;
         private CancellationTokenSource _searchCts;
 
         private static readonly DateTime currentDate = DateTime.UtcNow;
+
+        [ObservableProperty]
+        string distanceUnit;
+
+        [ObservableProperty]
+        string weightUnit;
 
         [ObservableProperty]
         private Profile currentProfile;
@@ -40,12 +50,27 @@ namespace FinalYearProject.ViewModels
         [ObservableProperty]
         private bool isContentVisible = true;
 
-        public ProfileViewModel(FirebaseAuthClient authClient, IProfileService profileService, IMapBoxService mapBoxService, ICarbonService carbonService)
+        [ObservableProperty]
+        private Color iconColour = Colors.White;
+
+        public ProfileViewModel(FirebaseAuthClient authClient, IProfileService profileService, IMapBoxService mapBoxService, ICarbonService carbonService, ISettingsService settingsService)
         {
             _auth = authClient;
             _profileService = profileService;
             _mapBoxService = mapBoxService;
             _carbonService = carbonService;
+            _settingsService = settingsService;
+            WeakReferenceMessenger.Default.Register<SettingsChangedMessage>(this, (recipient, message) =>
+            {
+                DistanceUnit = _settingsService.DistanceUnit;
+                WeightUnit = _settingsService.WeightUnit;
+            });
+
+            WeakReferenceMessenger.Default.Register<ChartsUpdatedMessage>(this, (recipient, message) =>
+            {
+                _ = ChartsUpdateAsync();
+            });
+
             _ = InitialiseAsync();
 
             string savedImagePath = Preferences.Default.Get("SavedProfilePic", string.Empty);
@@ -56,6 +81,15 @@ namespace FinalYearProject.ViewModels
             }
         }
 
+        async Task ChartsUpdateAsync()
+        {
+            await LoadProfileAsync();
+            await ReturnLevels();
+            await LoadChart();
+            await CalculateProgress();
+        }
+
+
         async Task InitialiseAsync()
         {
             try
@@ -63,6 +97,16 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
+                DistanceUnit = _settingsService.DistanceUnit;
+                WeightUnit = _settingsService.WeightUnit;
+                if (_settingsService.Theme == "Dark")
+                {
+                    IconColour = Colors.White;
+                }
+                else
+                {
+                    IconColour = Colors.Black;
+                }
                 await PopulateVehicleMakes();
                 await PopulateVehicleModels();
                 await LoadProfileAsync();
@@ -202,16 +246,23 @@ namespace FinalYearProject.ViewModels
             var selectedMonth = currentDate;
 
             // Build chart
-            MonthlyCarbonLineChart = new LineChart
+            if (MonthlyCarbonLineChart == null)
             {
-                Entries = monthlyCarbonEntries,
-                LabelTextSize = 30f,
-                BackgroundColor = SKColor.Empty,
-                LineMode = LineMode.Straight,
-                LineSize = 6,
-                PointSize = 12,
-                IsAnimated = false
-            };
+                MonthlyCarbonLineChart = new LineChart
+                {
+                    Entries = monthlyCarbonEntries,
+                    LabelTextSize = 30f,
+                    BackgroundColor = SKColors.White,
+                    LineMode = LineMode.Straight,
+                    LineSize = 6,
+                    PointSize = 12,
+                    IsAnimated = true
+                };
+            }
+            else
+            {
+                MonthlyCarbonLineChart.Entries = monthlyCarbonEntries;
+            }
 
         }
 

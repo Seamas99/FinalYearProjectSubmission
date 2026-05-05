@@ -8,7 +8,7 @@
             <VerticalStackLayout Padding="20" Spacing="20">
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Country" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Country" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Picker ItemsSource="{Binding Countries}" 
                             ItemDisplayBinding="{Binding name}" 
@@ -19,7 +19,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="State / Province / Region" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="State / Province / Region" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <controls:AutoCompleteSearchBox Placeholder="Search region..." SearchCommand="{Binding PerformRegionsSearch}" SelectedItem="{Binding Region}" DisplayMemberPath="Name" ResultsSource="{Binding SearchResults}">
                             <controls:AutoCompleteSearchBox.ItemTemplate>
@@ -32,7 +32,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Area / County" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Area / County" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <controls:AutoCompleteSearchBox Placeholder="Search area..." SearchCommand="{Binding PerformDistrictsSearch}" SelectedItem="{Binding Area}" DisplayMemberPath="Name" ResultsSource="{Binding SearchResults}">
                             <controls:AutoCompleteSearchBox.ItemTemplate>
@@ -45,7 +45,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="City" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="City" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <controls:AutoCompleteSearchBox Placeholder="Search city..." SearchCommand="{Binding PerformCitiesSearch}" SelectedItem="{Binding City}" DisplayMemberPath="Name" ResultsSource="{Binding SearchResults}">
                             <controls:AutoCompleteSearchBox.ItemTemplate>
@@ -58,7 +58,7 @@
                 </VerticalStackLayout>
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Postcode / Zipcode" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Postcode / Zipcode" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <controls:AutoCompleteSearchBox Placeholder="Search postcode..." SearchCommand="{Binding PerformPostcodesSearch}" SelectedItem="{Binding Postcode}" DisplayMemberPath="Name" ResultsSource="{Binding SearchResults}">
                             <controls:AutoCompleteSearchBox.ItemTemplate>
@@ -71,7 +71,7 @@
                 </VerticalStackLayout>
 
                 <Grid ColumnDefinitions="*, *" ColumnSpacing="15" Margin="0,15,0,0">
-                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigatePersonalCommand}" BackgroundColor="Transparent" TextColor="#6B7280" BorderColor="#D1D5DB" BorderWidth="1.5"/>
+                    <Button Grid.Column="0" Text="Previous" Command="{Binding NavigatePersonalCommand}" BackgroundColor="Transparent" TextColor="{StaticResource CarbonGreen}" BorderColor="{StaticResource CarbonGreen}" BorderWidth="1.5"/>
                     <Button Grid.Column="1" Text="Next" Command="{Binding NavigateHouseholdCommand}"/>
                 </Grid>
 

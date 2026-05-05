@@ -44,6 +44,11 @@ namespace FinalYearProject.ViewModels
             {
                 _ = InitialiseAsync();
             });
+
+            WeakReferenceMessenger.Default.Register<ChartsUpdatedMessage>(this, (recipient, message) =>
+            {
+                _ = InitialiseAsync();
+            });
         }
 
         async Task InitialiseAsync()
@@ -316,14 +321,22 @@ namespace FinalYearProject.ViewModels
                 BiggestCarbonSource = largestEntry.Label;
             }
 
-            MonthlyCarbonSourceDonutChart = new DonutChart
+            if (MonthlyCarbonSourceDonutChart == null)
             {
-                Entries = monthlyPercentageEntries,
-                HoleRadius = 0.6f,
-                LabelTextSize = 32f,
-                BackgroundColor = SKColor.Empty,
-                IsAnimated = false
-            };
+                // First time loading - create the chart
+                MonthlyCarbonSourceDonutChart = new DonutChart
+                {
+                    Entries = monthlyPercentageEntries,
+                    HoleRadius = 0.6f,
+                    LabelTextSize = 32f,
+                    BackgroundColor = SKColors.White,
+                    IsAnimated = true // Set to true to watch the data morph smoothly!
+                };
+            }
+            else
+            {
+                MonthlyCarbonSourceDonutChart.Entries = monthlyPercentageEntries;
+            }
 
             if (monthlyCarbon.Any())
             {
@@ -369,10 +382,10 @@ namespace FinalYearProject.ViewModels
         {
             return type switch
             {
-                "Flight" => SKColor.Parse("#e74c3c"),
-                "Vehicle" => SKColor.Parse("#3498db"),
-                "Electricity" => SKColor.Parse("#2ecc71"),
-                "Shipping" => SKColor.Parse("#2ecc71"),
+                "Flight" => SKColor.Parse("#b455b6"),
+                "Vehicle" => SKColor.Parse("#2c3e50"),
+                "Electricity" => SKColor.Parse("#77d065"),
+                "Shipping" => SKColor.Parse("#3498db"),
                 _ => SKColor.Parse("#9b59b6")
             };
         }
@@ -431,6 +444,9 @@ namespace FinalYearProject.ViewModels
         string username;
 
         [ObservableProperty]
+        SKColors labelColour;
+
+        [ObservableProperty]
         ChartEntry[] chartEntries = new[]
         {
             new ChartEntry(212)
@@ -453,7 +469,7 @@ namespace FinalYearProject.ViewModels
             },
             new ChartEntry(514)
             {
-                Label = "Diet",
+                Label = "Shipping",
                 ValueLabel = "214",
                 Color = SKColor.Parse("#3498db")
             }

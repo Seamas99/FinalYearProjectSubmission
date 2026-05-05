@@ -7,7 +7,7 @@
             <VerticalStackLayout Padding="20" Spacing="20">
 
                 <VerticalStackLayout Spacing="6">
-                    <Label Text="Electricity Used (mwh)" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
+                    <Label Text="Electricity Used (mwh)" Style="{StaticResource SubtleLabel}"/>
                     <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10,0">
                         <Entry Keyboard="Numeric" 
                            Text="{Binding ElectricityUsed}" 
