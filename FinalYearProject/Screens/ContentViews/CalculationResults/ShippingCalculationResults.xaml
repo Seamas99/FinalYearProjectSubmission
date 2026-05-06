@@ -11,7 +11,7 @@
                     <Label FontSize="28" TextColor="#15803D" FontAttributes="Bold" HorizontalOptions="Center">
                         <Label.Text>
                             <MultiBinding StringFormat="{}{0}{1}">
-                                <Binding Path="CarbonGenerated"/>
+                                <Binding Path="DisplayedCarbon"/>
                                 <Binding Path="WeightUnit"/>
                             </MultiBinding>
                         </Label.Text>

@@ -170,14 +170,29 @@ namespace FinalYearProject.ViewModels
         [RelayCommand]
         async Task SaveSettings()
         {
-            _settingsService.WeightUnit = ProposedSettings.WeightUnit;
-            _settingsService.DistanceUnit = ProposedSettings.DistanceUnit;
-            _settingsService.Theme = ProposedSettings.Theme;
-            Application.Current.UserAppTheme = Helper.HelperFunctions.AppThemeConverter(ProposedSettings.Theme);
+            try
+            {
+                IsBusy = true;
+                IsContentVisible = false;
 
-            _settingsService.SaveSettings();
-            Debug.WriteLine("Settings Saved");
-            HasUnsavedChanges = false;
+                _settingsService.WeightUnit = ProposedSettings.WeightUnit;
+                _settingsService.DistanceUnit = ProposedSettings.DistanceUnit;
+                _settingsService.Theme = ProposedSettings.Theme;
+                Application.Current.UserAppTheme = Helper.HelperFunctions.AppThemeConverter(ProposedSettings.Theme);
+
+                _settingsService.SaveSettings();
+                Debug.WriteLine("Settings Saved");
+                HasUnsavedChanges = false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+            finally
+            {
+                IsBusy = false;
+                IsContentVisible = true;
+            }
         }
     }
 }

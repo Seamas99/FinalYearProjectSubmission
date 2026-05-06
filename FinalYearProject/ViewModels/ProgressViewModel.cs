@@ -8,6 +8,7 @@ using FinalYearProject.Services;
 using Firebase.Auth;
 using Microcharts;
 using Microcharts.Maui;
+using Microsoft.Maui.Devices.Sensors;
 using SkiaSharp;
 using Syncfusion.Maui.Toolkit;
 using Syncfusion.Maui.Toolkit.Hosting;
@@ -25,6 +26,7 @@ namespace FinalYearProject.ViewModels
         private readonly IProfileService _profileService;
         private readonly IMapBoxService _mapBoxService;
         private readonly ICarbonService _carbonService;
+        private readonly ISettingsService _settingsService;
         private CancellationTokenSource _searchCts;
         private LeaderboardHelper leaderboardHelper = new();
         private static readonly DateTime currentDate = DateTime.UtcNow;
@@ -35,11 +37,18 @@ namespace FinalYearProject.ViewModels
         [ObservableProperty]
         private bool isContentVisible = true;
 
-        public ProgressViewModel(FirebaseAuthClient authClient, IProfileService profileService, ICarbonService carbonService)
+        [ObservableProperty]
+        string distanceUnit;
+
+        [ObservableProperty]
+        string weightUnit;
+
+        public ProgressViewModel(FirebaseAuthClient authClient, IProfileService profileService, ICarbonService carbonService, ISettingsService settingsService)
         {
             _auth = authClient;
             _profileService = profileService;
             _carbonService = carbonService;
+            _settingsService = settingsService;
 
             try
             {
@@ -58,6 +67,11 @@ namespace FinalYearProject.ViewModels
             {
                 _ = InitialiseAsync();
             });
+
+            WeakReferenceMessenger.Default.Register<SettingsChangedMessage>(this, (recipient, message) =>
+            {
+                _ = InitialiseAsync();
+            });
         }
 
         private async Task InitialiseAsync()
@@ -67,6 +81,8 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
+                DistanceUnit = _settingsService.DistanceUnit;
+                WeightUnit = _settingsService.WeightUnit;
                 await LoadChart();
             }
             catch (Exception ex)
@@ -267,6 +283,24 @@ namespace FinalYearProject.ViewModels
                 .Where(e => e.UserID == userId)
                 .ToList();
 
+            float metricMultiplier = 1;
+            if (_settingsService.WeightUnit == "g")
+            {
+                metricMultiplier = 1;
+            }
+            else if (_settingsService.WeightUnit == "kg")
+            {
+                metricMultiplier = 0.001f;
+            }
+            else if (_settingsService.WeightUnit == "lb")
+            {
+                metricMultiplier = 0.002204623f;
+            }
+            else if (_settingsService.WeightUnit == "mt")
+            {
+                metricMultiplier = 0.000001f;
+            }
+
             // Group by month and sum MonthCarbon
             var monthlyCarbon = userEntries
                 .GroupBy(e => new { e.EntryDate.Year, e.EntryDate.Month })
@@ -275,7 +309,7 @@ namespace FinalYearProject.ViewModels
                 .Select(g => new
                 {
                     Month = new DateTime(g.Key.Year, g.Key.Month, 1),
-                    TotalCarbon = g.Sum(x => x.MonthCarbon)
+                    TotalCarbon = g.Sum((x => x.MonthCarbon * metricMultiplier))
                 })
                 .ToList();
 
@@ -323,6 +357,22 @@ namespace FinalYearProject.ViewModels
                 })
                 .ToList();
 
+            if(_settingsService.WeightUnit == "g")
+            {
+                metricMultiplier = 1;
+            }
+            else if (_settingsService.WeightUnit == "kg")
+            {
+                metricMultiplier = 0.001f;
+            }
+            else if (_settingsService.WeightUnit == "lb")
+            {
+                metricMultiplier = 0.002204623f;
+            }
+            else if (_settingsService.WeightUnit == "mt")
+            {
+                metricMultiplier = 0.000001f;
+            }
             var monthlyPercentages = allFootprints
                 // First group by month
                 .GroupBy(e => new { e.MeasureDate.Year, e.MeasureDate.Month })
@@ -338,7 +388,7 @@ namespace FinalYearProject.ViewModels
                         .Select(typeGroup => new
                         {
                             Type = typeGroup.Key,
-                            Carbon = typeGroup.Sum(x => x.CarbonMeasurement)
+                            Carbon = typeGroup.Sum((x => x.CarbonMeasurement * metricMultiplier))
                         }).ToList()
 
                 }).ToList();
@@ -410,7 +460,7 @@ namespace FinalYearProject.ViewModels
                     LineMode = LineMode.Straight,
                     LineSize = 6,
                     PointSize = 12,
-                    IsAnimated = true
+                    IsAnimated = false
                 };
             }
             else
@@ -428,7 +478,7 @@ namespace FinalYearProject.ViewModels
                     LineMode = LineMode.Straight,
                     LineSize = 6,
                     PointSize = 12,
-                    IsAnimated = true
+                    IsAnimated = false
                 };
             }
             else
@@ -446,7 +496,7 @@ namespace FinalYearProject.ViewModels
                     LineMode = LineMode.Straight,
                     LineSize = 6,
                     PointSize = 12,
-                    IsAnimated = true
+                    IsAnimated = false
                 };
             }
             else
@@ -464,7 +514,7 @@ namespace FinalYearProject.ViewModels
                     LineMode = LineMode.Straight,
                     LineSize = 6,
                     PointSize = 12,
-                    IsAnimated = true
+                    IsAnimated = false
                 };
             }
             else
@@ -482,7 +532,7 @@ namespace FinalYearProject.ViewModels
                     LineMode = LineMode.Straight,
                     LineSize = 6,
                     PointSize = 12,
-                    IsAnimated = true
+                    IsAnimated = false
                 };
             }
             else
@@ -498,7 +548,7 @@ namespace FinalYearProject.ViewModels
                     HoleRadius = 0.6f,
                     LabelTextSize = 32f,
                     BackgroundColor = SKColors.White,
-                    IsAnimated = true
+                    IsAnimated = false
                 };
             }
             else

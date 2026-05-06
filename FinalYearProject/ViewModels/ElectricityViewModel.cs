@@ -53,6 +53,9 @@ namespace FinalYearProject.ViewModels
         float carbonGenerated;
 
         [ObservableProperty]
+        float displayedCarbon;
+
+        [ObservableProperty]
         int electricityUsed;
 
         ElectricityRequest ReturnElectricity()
@@ -107,23 +110,26 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
+                CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_g;
+
+
                 if (WeightUnit == "g")
                 {
-                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_g;
+                    DisplayedCarbon = ElectricityList.FirstOrDefault().data.attributes.carbon_g;
                 }
                 else if (WeightUnit == "lb")
                 {
-                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_lb;
+                    DisplayedCarbon = ElectricityList.FirstOrDefault().data.attributes.carbon_lb;
 
                 }
                 else if (WeightUnit == "kg")
                 {
-                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_kg;
+                    DisplayedCarbon = ElectricityList.FirstOrDefault().data.attributes.carbon_kg;
 
                 }
                 else if (WeightUnit == "mt")
                 {
-                    CarbonGenerated = ElectricityList.FirstOrDefault().data.attributes.carbon_mt;
+                    DisplayedCarbon = ElectricityList.FirstOrDefault().data.attributes.carbon_mt;
 
                 }
 

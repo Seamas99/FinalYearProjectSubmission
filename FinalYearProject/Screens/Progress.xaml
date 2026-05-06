@@ -62,7 +62,15 @@
                                     <VerticalStackLayout Spacing="12">
                                         <Grid ColumnDefinitions="*, Auto">
                                             <Label Text="Average Monthly Carbon" TextColor="#6B7280" FontSize="14" VerticalOptions="Center"/>
-                                            <Label Grid.Column="1" Text="{Binding AverageCarbon}" FontAttributes="Bold" FontSize="14" TextColor="#374151" VerticalOptions="Center"/>
+                                            <Label Grid.Column="1" FontAttributes="Bold" FontSize="14" TextColor="#374151" VerticalOptions="Center">
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0}{1}">
+                                                        <Binding Path="AverageCarbon"/>
+                                                        <Binding Path="WeightUnit"/>
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
                                         </Grid>
                                         <BoxView HeightRequest="1" Color="#F3F4F6" />
                                         <Grid ColumnDefinitions="*, Auto">

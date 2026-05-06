@@ -81,6 +81,10 @@ namespace FinalYearProject.ViewModels
 
         [ObservableProperty]
         float carbonGenerated;
+
+        [ObservableProperty]
+        float displayedCarbon;
+
         partial void OnCarbonGeneratedChanged(float carbon)
         {
             Debug.WriteLine(CarbonGenerated.ToString());
@@ -157,23 +161,26 @@ namespace FinalYearProject.ViewModels
                 IsContentVisible = false;
                 await GetVehicleAsync(ModelID, DistanceTravelled);
 
+                CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_g;
+
+
                 if (WeightUnit == "g")
                 {
-                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_g;
+                    DisplayedCarbon = Vehicles.FirstOrDefault().data.attributes.carbon_g;
                 }
                 else if (WeightUnit == "lb")
                 {
-                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_lb;
+                    DisplayedCarbon = Vehicles.FirstOrDefault().data.attributes.carbon_lb;
 
                 }
                 else if (WeightUnit == "kg")
                 {
-                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_kg;
+                    DisplayedCarbon = Vehicles.FirstOrDefault().data.attributes.carbon_kg;
 
                 }
                 else if (WeightUnit == "mt")
                 {
-                    CarbonGenerated = Vehicles.FirstOrDefault().data.attributes.carbon_mt;
+                    DisplayedCarbon = Vehicles.FirstOrDefault().data.attributes.carbon_mt;
 
                 }
 
@@ -224,23 +231,27 @@ namespace FinalYearProject.ViewModels
             vehicle.data.attributes.carbon_lb = 81.64F;
             vehicle.data.attributes.carbon_kg = 37.03F;
             vehicle.data.attributes.carbon_mt = 0.04F;
+
+            CarbonGenerated = vehicle.data.attributes.carbon_g;
+
+
             if (WeightUnit == "g")
             {
-                CarbonGenerated = vehicle.data.attributes.carbon_g;
+                DisplayedCarbon = vehicle.data.attributes.carbon_g;
             }
             else if (WeightUnit == "lb")
             {
-                CarbonGenerated = vehicle.data.attributes.carbon_lb;
+                DisplayedCarbon = vehicle.data.attributes.carbon_lb;
 
             }
             else if (WeightUnit == "kg")
             {
-                CarbonGenerated = vehicle.data.attributes.carbon_kg;
+                DisplayedCarbon = vehicle.data.attributes.carbon_kg;
 
             }
             else if (WeightUnit == "mt")
             {
-                CarbonGenerated = vehicle.data.attributes.carbon_mt;
+                DisplayedCarbon = vehicle.data.attributes.carbon_mt;
 
             }
             DistanceTravelled = 1000;

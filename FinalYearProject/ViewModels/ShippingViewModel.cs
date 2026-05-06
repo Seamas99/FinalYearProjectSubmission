@@ -50,9 +50,14 @@ namespace FinalYearProject.ViewModels
         float carbonGenerated;
 
         [ObservableProperty]
+        float displayedCarbon;
+
+        [ObservableProperty]
         int distance;
+
         [ObservableProperty]
         int weightValue;
+
         [ObservableProperty]
         string transportMethod;
 
@@ -121,23 +126,25 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
+                CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_g;
+
                 if (WeightUnit == "g")
                 {
-                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_g;
+                    DisplayedCarbon = ShippingList.FirstOrDefault().data.attributes.carbon_g;
                 }
                 else if (WeightUnit == "lb")
                 {
-                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_lb;
+                    DisplayedCarbon = ShippingList.FirstOrDefault().data.attributes.carbon_lb;
 
                 }
                 else if (WeightUnit == "kg")
                 {
-                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_kg;
+                    DisplayedCarbon = ShippingList.FirstOrDefault().data.attributes.carbon_kg;
 
                 }
                 else if (WeightUnit == "mt")
                 {
-                    CarbonGenerated = ShippingList.FirstOrDefault().data.attributes.carbon_mt;
+                    DisplayedCarbon = ShippingList.FirstOrDefault().data.attributes.carbon_mt;
 
                 }
 

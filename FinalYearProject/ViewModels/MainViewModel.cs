@@ -49,6 +49,11 @@ namespace FinalYearProject.ViewModels
             {
                 _ = InitialiseAsync();
             });
+
+            WeakReferenceMessenger.Default.Register<SettingsChangedMessage>(this, (recipient, message) =>
+            {
+                _ = InitialiseAsync();
+            });
         }
 
         async Task InitialiseAsync()
@@ -182,6 +187,24 @@ namespace FinalYearProject.ViewModels
                 .Where(e => e.UserID == userId)
                 .ToList();
 
+            float metricMultiplier = 1;
+            if (_settingsService.WeightUnit == "g")
+            {
+                metricMultiplier = 1;
+            }
+            else if (_settingsService.WeightUnit == "kg")
+            {
+                metricMultiplier = 0.001f;
+            }
+            else if (_settingsService.WeightUnit == "lb")
+            {
+                metricMultiplier = 0.002204623f;
+            }
+            else if (_settingsService.WeightUnit == "mt")
+            {
+                metricMultiplier = 0.000001f;
+            }
+
             // Group by month and sum MonthCarbon
             var monthlyCarbon = userEntries
                 .GroupBy(e => new { e.EntryDate.Year, e.EntryDate.Month })
@@ -190,7 +213,7 @@ namespace FinalYearProject.ViewModels
                 .Select(g => new
                 {
                     Month = new DateTime(g.Key.Year, g.Key.Month, 1),
-                    TotalCarbon = g.Sum(x => x.MonthCarbon)
+                    TotalCarbon = g.Sum((x => x.MonthCarbon * metricMultiplier))
                 })
                 .ToList();
 
@@ -253,7 +276,7 @@ namespace FinalYearProject.ViewModels
                         .Select(typeGroup => new
                         {
                             Type = typeGroup.Key,
-                            Carbon = typeGroup.Sum(x => x.CarbonMeasurement)
+                            Carbon = typeGroup.Sum((x => x.CarbonMeasurement * metricMultiplier))
                         }).ToList()
 
                 }).ToList();
@@ -330,7 +353,7 @@ namespace FinalYearProject.ViewModels
                     HoleRadius = 0.6f,
                     LabelTextSize = 32f,
                     BackgroundColor = SKColors.White,
-                    IsAnimated = true // Set to true to watch the data morph smoothly!
+                    IsAnimated = false
                 };
             }
             else

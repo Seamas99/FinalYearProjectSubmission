@@ -60,6 +60,9 @@ namespace FinalYearProject.ViewModels
         float carbonGenerated;
 
         [ObservableProperty]
+        float displayedCarbon;
+
+        [ObservableProperty]
         Flight selectedFlight;
 
         [ObservableProperty]
@@ -219,23 +222,26 @@ namespace FinalYearProject.ViewModels
                 IsBusy = true;
                 IsContentVisible = false;
 
+                CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_g;
+
+
                 if (WeightUnit == "g")
                 {
-                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_g;
+                    DisplayedCarbon = Flights.FirstOrDefault().data.attributes.carbon_g;
                 }
                 else if (WeightUnit == "lb")
                 {
-                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_lb;
+                    DisplayedCarbon = Flights.FirstOrDefault().data.attributes.carbon_lb;
 
                 }
                 else if (WeightUnit == "kg")
                 {
-                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_kg;
+                    DisplayedCarbon = Flights.FirstOrDefault().data.attributes.carbon_kg;
 
                 }
                 else if (WeightUnit == "mt")
                 {
-                    CarbonGenerated = Flights.FirstOrDefault().data.attributes.carbon_mt;
+                    DisplayedCarbon = Flights.FirstOrDefault().data.attributes.carbon_mt;
 
                 }
 
