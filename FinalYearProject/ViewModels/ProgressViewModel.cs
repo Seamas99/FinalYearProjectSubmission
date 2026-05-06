@@ -519,21 +519,30 @@ namespace FinalYearProject.ViewModels
                     {
                         CarbonDifferencePercentage = Math.Abs(((currentCarbon - previousCarbon) / previousCarbon) * 100f);
                     }
+                    else
+                    {
+                        CarbonDifferenceVisible = false;
+                    }
 
-                    if (currentCarbon > previousCarbon)
+                    if (currentCarbon > previousCarbon && previousCarbon > 0)
                     {
                         CarbonHigherLower = "Your carbon was higher by ";
                         CarbonDifferenceVisible = true;
                     }
-                    else if (currentCarbon < previousCarbon)
+                    else if (currentCarbon < previousCarbon && currentCarbon > 0)
                     {
                         CarbonHigherLower = "Your carbon was lower by ";
                         CarbonDifferenceVisible = true;
 
                     }
-                    else
+                    else if (currentCarbon == previousCarbon)
                     {
                         CarbonHigherLower = "Your carbon was the same as last month!";
+                        CarbonDifferenceVisible = false;
+                    }
+                    else
+                    {
+                        CarbonHigherLower = "";
                         CarbonDifferenceVisible = false;
                     }
                 }
@@ -557,20 +566,29 @@ namespace FinalYearProject.ViewModels
                     {
                         XPDifferencePercentage = Math.Abs(((currentXp - previousXp) / previousXp) * 100f);
                     }
+                    else
+                    {
+                        xpDifferenceVisible = false;
+                    }
 
-                    if (currentXp > previousXp)
+                    if (currentXp > previousXp && previousXp > 0)
                     {
                         XPHigherLower = "Your xp gain was higher by ";
                         XpDifferenceVisible = true;
                     }
-                    else if (currentXp < previousXp)
+                    else if (currentXp < previousXp && currentXp > 0)
                     {
                         XPHigherLower = "Your xp gain was lower by ";
                         XpDifferenceVisible = true;
                     }
-                    else
+                    else if (previousXp == currentXp)
                     {
                         XPHigherLower = "Your xp gain was the same as last month!";
+                        XpDifferenceVisible = false;
+                    }
+                    else
+                    {
+                        XPHigherLower = "";
                         XpDifferenceVisible = false;
                     }
                 }
