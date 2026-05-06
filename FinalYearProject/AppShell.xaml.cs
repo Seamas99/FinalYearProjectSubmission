@@ -44,7 +44,15 @@ namespace FinalYearProject
             _isConfirmingNavigation = false;
         }
 
+        protected override bool OnBackButtonPressed()
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await Shell.Current.GoToAsync("..");
+            });
 
+            return true;
+        }
 
     }
 }
