@@ -39,7 +39,7 @@
 
                         <VerticalStackLayout Spacing="6">
                             <Label Text="Vehicle Make" Style="{StaticResource SubtleLabel}"/>
-                            <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" BackgroundColor="White" Padding="10,0">
+                            <Border Style="{StaticResource RoundRectangle8Border}">
                                 <Picker ItemsSource="{Binding FullVehicleMakes}" 
                                     ItemDisplayBinding="{Binding name}" 
                                     SelectedItem="{Binding SelectedMake}"
@@ -49,8 +49,8 @@
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="6">
-                            <Label Text="Vehicle Model" FontSize="14" TextColor="#6B7280" FontAttributes="Bold"/>
-                            <Border Stroke="#D1D5DB" StrokeThickness="1" StrokeShape="RoundRectangle 8" BackgroundColor="White" Padding="10,0">
+                            <Label Text="Vehicle Model" Style="{StaticResource SubtleLabel}"/>
+                            <Border Style="{StaticResource RoundRectangle8Border}">
                                 <Picker ItemsSource="{Binding SelectedMakeListOfVehicleModels}" 
                                     ItemDisplayBinding="{Binding name}" 
                                     SelectedItem="{Binding SelectedModel}"
